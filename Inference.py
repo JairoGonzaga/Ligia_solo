@@ -5,7 +5,6 @@ import joblib
 import plotly.graph_objects as go
 import plotly.express as px
 
-# Configuração da página
 st.set_page_config(
     page_title="Detector de Fraude",
     page_icon="🔍",
@@ -13,7 +12,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# CSS personalizado para design moderno
 st.markdown("""
 <style>
     /* Tema escuro moderno */
@@ -133,7 +131,7 @@ st.markdown("""
 def load_models():
     try:
         model = joblib.load('Modelo_infos/modelo_stacking.joblib')
-        scaler = joblib.load('scaler.joblib')
+        scaler = joblib.load('Modelo_infos/scaler.joblib')
         power_transformer = joblib.load('Modelo_infos/power_transformer.joblib')
         threshold = joblib.load('Modelo_infos/best_threshold.joblib')
         feature_names = joblib.load('Modelo_infos/feature_names.joblib')
@@ -144,16 +142,13 @@ def load_models():
         return None, None, None, None, None
 
 
-# Carregar modelos
 model, scaler, power_transformer, threshold, feature_names = load_models()
 
-# Header
 st.markdown('<h1 class="main-title">🔍 Detector de Fraude</h1>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Sistema inteligente de detecção de transações fraudulentas usando Machine Learning</p>', unsafe_allow_html=True)
 st.markdown('<div class="custom-divider"></div>', unsafe_allow_html=True)
 
 if model is not None:
-    # Layout principal
     col_input, col_result = st.columns([2, 1])
     
     with col_input:
